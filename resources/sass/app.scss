@@ -1,0 +1,91 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// BASIC LAYOUT
+.ant-layout, .ant-layout-footer {
+  background: transparent !important;
+}
+
+#vue-app {
+  height: 100%;
+  background-color: #ddd6fe;
+}
+
+.sidebar{
+  border-right: 1px solid #bbb;
+  hr{
+    margin-top: 15px;
+  }
+  .title-group{
+    font-size: 1rem;
+  }
+}
+
+// MENU AND SUBMENU
+.ant-menu-item a:hover, .ant-menu-submenu-title:hover, 
+.ant-menu-submenu-arrow::before, .ant-menu-submenu-arrow::after  {
+  color: #581c87 !important;
+  font-weight: 500;
+}
+.ant-menu-item-selected, .ant-menu-item-selected a {
+  background-color: #e9d5ff !important;
+  color: #581c87 !important;
+  font-weight: 500;
+}
+.ant-menu-submenu {
+  color: #000 !important;
+}
+.ant-menu-submenu-selected {
+  color: #7e22ce !important;
+}
+.ant-menu-inline .ant-menu-item-selected::after{
+  border-right: 3px solid #581c87 !important;;
+}
+.ant-menu-light .ant-menu-item:hover  {
+  color: #7e22ce !important;
+}
+.ant-menu-submenu .ant-menu-submenu-popup a {
+  color: #7e22ce !important;
+}
+
+// COLLAPSED
+.ant-menu-inline-collapsed {
+  .ant-menu-item{
+    padding-inline:  16px !important;
+  }
+}
+
+// SCROLLBAR
+::-webkit-scrollbar {
+  display: none;
+}
+
+// TABEL
+.ant-table{
+  .ant-table-thead{
+    th{
+      background-color: #e9d5ff !important;
+      padding: 10px !important;
+    }
+  }
+  .ant-table-tbody > tr > td {
+    padding: 7px 15px;
+  }
+}
+
+//PINK CARD HEAD
+.pink-card-head .ant-card-head{
+  background: #e9d5ff !important;
+}
+
+//BUTTON
+.ant-btn-group {
+  border: none;
+}
+.ant-btn-group .ant-btn {
+  border: none;
+}
