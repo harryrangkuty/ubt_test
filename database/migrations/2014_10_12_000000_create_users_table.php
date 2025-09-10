@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->unsignedBigInteger('unit_id');
             $table->string('photo')->nullable();
+            $table->string('password')->nullable();
             $table->unsignedInteger('active_role_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
