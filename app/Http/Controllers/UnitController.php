@@ -14,7 +14,7 @@ class UnitController extends Controller
         ];
 
         $title = 'Manajemen Unit';
-        $vue = "<unit-page :constant='" . json_encode($constant) . "' />";
+        $vue = "<unit-page :title='" . json_encode($title) . "' :constant='" . json_encode($constant) . "' />";
         return response()->view('layouts.antd', compact('vue', 'title'));
     }
     public function read(Request $request)

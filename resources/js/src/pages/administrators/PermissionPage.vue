@@ -17,7 +17,7 @@ const columns = [
     {
         title: "Action",
         key: "action",
-        align: "left",
+        align: "center",
         width: 100,
         fixed: 'right',
     },
@@ -25,6 +25,7 @@ const columns = [
 
 export default {
     props: {
+        title: String,
         constant: {
             type: Object,
             default: () => ({}),
@@ -50,7 +51,7 @@ export default {
         async readData(v) {
             const vm = this;
             vm.loadingTrue();
-            
+
             let params = v ?? {
                 total: vm._pagination.total,
                 page: vm._pagination.current,
@@ -118,46 +119,50 @@ export default {
 </script>
 
 <template>
-    <a-row type="flex" justify="center">
-        <a-col :span="24">
-            <a-card class="card">
-                <a-row class="flex flex-wrap items-center justify-between mb-4 pb-4 border-b-2">
-                    <h1 class="text-base font-semibold">Manajemen Permission</h1>
-                      <div class="flex justify-end items-end w-full md:w-auto">
-                        <a-row class="flex flex-wrap justify-start sm:justify-end gap-2 items-center">
-                            <a-col class="sm:w-auto w-full">
-                                <a-input v-model:value="filter.search" @keyup.enter="readData" placeholder="Cari Permission ...">
-                                    <template #addonAfter>
-                                        <Icon icon='ant-design:search-outlined' />
-                                    </template>
-                                </a-input>
-                            </a-col>
-                            <a-col class="sm:w-auto w-full">
-                                <a-button class="flex items-center justify-center w-full" type="primary" @click="newData()">Tambah Permission</a-button>
-                            </a-col>
-                        </a-row>
-                    </div>
+    <a-card class="card">
+        <a-row class="flex flex-wrap items-start justify-between mb-4 pb-4 border-b-2 gap-y-4">
+            <a-col :xs="24" :sm="24" :md="6">
+                <h1 class="text-base font-semibold">
+                    {{ title }}
+                </h1>
+            </a-col>
+            <a-col :xs="24" :sm="24" :md="18" class="flex justify-end">
+                <a-row class="flex flex-wrap gap-2 justify-start md:justify-end w-full md:w-auto">
+                    <a-col class="w-full md:w-auto">
+                        <a-input v-model:value="filter.search" @keyup.enter="readData" class="min-w-32 lg:w-64 w-full"
+                            placeholder="Cari Permission ...">
+                            <template #addonAfter>
+                                <Icon icon='ant-design:search-outlined' />
+                            </template>
+                        </a-input>
+                    </a-col>
+                    <a-col class="w-full md:w-auto">
+                        <a-button class="flex items-center justify-center w-full" type="primary" @click="newData()">
+                            Tambah Permission
+                        </a-button>
+                    </a-col>
                 </a-row>
-                <a-table :scroll="{ x: 800 }" :columns="columns" :row-key="(obj) => obj.id" :pagination="_pagination"
-                    :loading="loadingStatus" :data-source="models" @change="handleTableChange">
-                    <template #bodyCell="{ record, column }">
-                        <template v-if="column.key === 'action'">
-                            <a-button-group>
-                                <a-button size="small" type="primary" @click="editData(record)">
-                                <Icon icon='ant-design:form-outlined' />
-                                </a-button>
-                                <a-popconfirm title="Yakin menghapus data?" @confirm="deleteData(record.id)">
-                                <a-button size="small" type="primary" danger>
-                                    <Icon icon="ant-design:delete-outlined"/>
-                                </a-button>
-                                </a-popconfirm>
-                            </a-button-group>
-                        </template>
-                    </template>
-                </a-table>
-            </a-card>
-        </a-col>
-    </a-row>
+            </a-col>
+        </a-row>
+        <a-table :scroll="{ x: 800 }" :columns="columns" :row-key="(obj) => obj.id" :pagination="_pagination"
+            :loading="loadingStatus" :data-source="models" @change="handleTableChange">
+            <template #bodyCell="{ record, column }">
+                <template v-if="column.key === 'action'">
+                      <a-button-group class="flex justify-center">
+                        <a-button size="small" type="text" @click="editData(record)" :style="{ padding: '0 5px' }">
+                            <Icon icon="line-md:pencil-twotone"
+                                class="flex justify-center text-green-500 text-[24px]" />
+                        </a-button>
+                        <a-popconfirm title="Yakin menghapus data?" @confirm="deleteData(record.id)">
+                            <a-button type="text" danger size="small" :style="{ padding: '0 5px' }">
+                                <Icon icon="line-md:trash" class="flex justify-center text-red-500 text-[24px]" />
+                            </a-button>
+                        </a-popconfirm>
+                    </a-button-group>
+                </template>
+            </template>
+        </a-table>
+    </a-card>
     <a-modal v-model:open="showModal" :title="form.id ? 'Ubah Data' : 'Tambah Data'" width="700px" @ok="writeData"
         :mask-closable="false" :destroy-on-close="true">
         <a-form ref="form" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">

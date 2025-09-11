@@ -32,7 +32,7 @@ if (!function_exists('menu_list')) {
             ['key' => 'my_post', 'icon' => 'bi:person', 'title' => 'Postingan Saya', 'url' => 'my_post'],
             ['key' => null, 'title' => 'Administrator', "icon" => null, "url" => null],
             ['key' => 'user', 'icon' => 'bi:person-gear', 'title' => 'Manajemen User', 'url' => 'user'],
-            ['key' => 'unit', 'icon' => 'bi:building-gear', 'title' => 'Manajemen Kategori', 'url' => 'unit'],
+            ['key' => 'unit', 'icon' => 'bi:building-gear', 'title' => 'Manajemen Unit', 'url' => 'unit'],
             ['key' => 'role', 'icon' => 'bi:people', 'title' => 'Manajemen Role', 'url' => 'role'],
             ['key' => 'permission', 'icon' => 'bi:eye', 'title' => 'Manajemen Permission', 'url' => 'permission'],
             [

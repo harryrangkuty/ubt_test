@@ -12,7 +12,7 @@ class PermissionController extends Controller
         $constant = [];
 
         $title = 'Manajemen Permission';
-        $vue = "<permission-page :constant='" . json_encode($constant) . "' />";
+        $vue = "<permission-page :title='" . json_encode($title) . "' :constant='" . json_encode($constant) . "' />";
         return response()->view('layouts.antd', compact('vue', 'title'));
     }
     public function read(Request $request)

@@ -15,7 +15,7 @@ class RoleController extends Controller
         ];
 
         $title = 'Manajemen Role';
-        $vue = "<role-page :constant='" . json_encode($constant) . "' />";
+        $vue = "<role-page :title='" . json_encode($title) . "' :constant='" . json_encode($constant) . "' />";
         return response()->view('layouts.antd', compact('vue', 'title'));
     }
     public function read(Request $request)

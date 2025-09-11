@@ -42,6 +42,7 @@ const permissions_columns = [
 
 export default {
     props: {
+        title: String,
         constant: {
             type: Object,
             default: () => ({}),
@@ -207,36 +208,45 @@ export default {
     <a-row :gutter="12">
         <a-col :lg="14" :span="24">
             <a-card class="card h-full">
-                <a-row class="flex flex-wrap items-center justify-between mb-4 pb-4 border-b-2">
-                    <h1 class="text-base font-semibold">Manajemen Role</h1>
-                    <div class="flex justify-end items-end w-full md:w-auto">
-                        <a-row class="flex flex-wrap justify-start sm:justify-end gap-2 items-center">
-                            <a-col class="sm:w-auto w-full">
+                <a-row class="flex flex-wrap items-start justify-between mb-4 pb-4 border-b-2 gap-y-4">
+                    <a-col :xs="24" :sm="24" :md="6">
+                        <h1 class="text-base font-semibold">
+                            {{ title }}
+                        </h1>
+                    </a-col>
+                    <a-col :xs="24" :sm="24" :md="18" class="flex justify-end">
+                        <a-row class="flex flex-wrap gap-2 justify-start md:justify-end w-full md:w-auto">
+                            <a-col class="w-full md:w-auto">
                                 <a-input v-model:value="filter.search" @keyup.enter="readData"
-                                    placeholder="Cari Role ...">
+                                    class="min-w-32 lg:w-64 w-full" placeholder="Cari Role ...">
                                     <template #addonAfter>
                                         <Icon icon='ant-design:search-outlined' />
                                     </template>
                                 </a-input>
                             </a-col>
-                            <a-col class="sm:w-auto w-full">
+                            <a-col class="w-full md:w-auto">
                                 <a-button class="flex items-center justify-center w-full" type="primary"
-                                    @click="newData()">Tambah Role</a-button>
+                                    @click="newData()">
+                                    Tambah Role
+                                </a-button>
                             </a-col>
                         </a-row>
-                    </div>
+                    </a-col>
                 </a-row>
                 <a-table :scroll="{ x: 800 }" :columns="columns" :row-key="(obj) => obj.id" :pagination="_pagination"
                     :loading="loadingStatus" :data-source="models" @change="handleTableChange">
                     <template #bodyCell="{ column, record }">
                         <template v-if="column.key === 'action'">
-                            <a-button-group>
-                                <a-button size="small" type="primary" @click="editData(record)">
-                                    <Icon icon='ant-design:form-outlined' />
+                            <a-button-group class="flex justify-center">
+                                <a-button size="small" type="text" @click="editData(record)"
+                                    :style="{ padding: '0 5px' }">
+                                    <Icon icon="line-md:pencil-twotone"
+                                        class="flex justify-center text-green-500 text-[24px]" />
                                 </a-button>
-                                <a-button size="small" class="bg-green-500 border-green-500 text-white"
-                                    @click="selectRole(record.id, record.name)">
-                                    <Icon icon='ant-design:arrow-right-outlined' />
+                                <a-button size="small" type="text" @click="selectRole(record.id, record.name)"
+                                    :style="{ padding: '0 5px' }">
+                                    <Icon icon="line-md:arrow-right-circle"
+                                        class="flex justify-center text-blue-500 text-[24px]" />
                                 </a-button>
                             </a-button-group>
                         </template>
@@ -249,20 +259,19 @@ export default {
                 <div class="pb-4 border-b-2">
                     <h1 class="text-base font-semibold">Permission untuk Role {{ selectedRole.name }}</h1>
                 </div>
-                <a-row class="flex flex-wrap items-center justify-start sm:justify-end py-4 gap-2">
-                    <a-col class="sm:w-auto w-full lg:mb-0 mb-4">
-                        <a-select v-model:value="form.permissions" mode="multiple" show-search
-                            option-filter-prop="title" class="xl:w-52 lg:w-40 md:w-36 sm:w-40 w-full" allow-clear
-                            placeholder="--Pilih Permission--">
+                <a-row class="py-4 flex flex-wrap gap-2 justify-start md:justify-end w-full md:w-auto">
+                    <a-col class="w-full md:w-auto">
+                        <a-select v-model:value="form.permissions" class="min-w-32 lg:w-64 w-full" mode="multiple"
+                            show-search option-filter-prop="title" allow-clear placeholder="--Pilih Permission--">
                             <a-select-option v-for="permission in available_permissions" :key="permission.id"
                                 :value="permission.id" :title="permission.name">
                                 {{ permission.name }}
                             </a-select-option>
                         </a-select>
                     </a-col>
-                    <a-col class="sm:w-auto w-full lg:mb-0 mb-4">
-                        <a-button type="primary" class=" w-full items-center justify-center"
-                            @click="attachPermission()">Attach Permission</a-button>
+                    <a-col class="w-full md:w-auto">
+                        <a-button type="primary" class="w-full items-center justify-center" @click="attachPermission()">
+                            Attach Permission</a-button>
                     </a-col>
                 </a-row>
                 <a-table :scroll="{ x: 800 }" :columns="permissions_columns" :row-key="(obj) => obj.id"
@@ -272,8 +281,9 @@ export default {
                         <template v-if="column.key === 'action'">
                             <a-popconfirm title="Yakin detach permission ini?" @confirm="detachPermission(record.id)"
                                 :disabled="record.name == 'sudo'">
-                                <a-button size="small" type="primary" danger :disabled="record.name == 'sudo'">
-                                    <Icon icon='ant-design:delete-outlined' />
+                                <a-button size="small" danger type="text" :style="{ padding: '0 5px' }"
+                                    :disabled="record.name == 'sudo'">
+                                    <Icon icon="line-md:trash" class="flex justify-center text-red-500 text-[24px]" />
                                 </a-button>
                             </a-popconfirm>
                         </template>
