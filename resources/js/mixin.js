@@ -64,9 +64,12 @@ export default {
 
   methods: {
     filterDateRange(val) {
-      if (val && Array.isArray(val)) {
+      if (val && Array.isArray(val) && val.length === 2) {
         this.filter.date_start = dayjs(val[0]).format('YYYY-MM-DD');
         this.filter.date_end = dayjs(val[1]).format('YYYY-MM-DD');
+      } else {
+        this.filter.date_start = null;
+        this.filter.date_end = null;
       }
     },
 

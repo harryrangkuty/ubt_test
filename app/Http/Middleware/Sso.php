@@ -39,6 +39,10 @@ class Sso
                     $user->photo = $login->payload->photo;
                     $user->save();
                 }
+                if ($user->name !== $login->payload->name) {
+                    $user->name = $login->payload->name;
+                    $user->save();
+                }
                 Auth::login($user);
             }
             return $next($request);
