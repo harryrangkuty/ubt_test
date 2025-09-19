@@ -55,6 +55,7 @@ class LaratrustSeeder extends Seeder
             'name' => 'Harry Rahman Rangkuti',
             'email' => 'harryrahman2768@gmail.com',
             'unit_id' => 1,
+            'password' => bcrypt('1234567890'),
             'photo' => null,
             'active_role_id' => 1,
         ]);
