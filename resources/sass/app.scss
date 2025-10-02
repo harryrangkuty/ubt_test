@@ -52,10 +52,29 @@
   color: #7e22ce !important;
 }
 
-// COLLAPSED
+// AGAR SUBMENU TIDAK ADA WARNA LATAR
+.ant-menu-inline {
+  background: transparent !important;
+}
+
+
 .ant-menu-inline-collapsed {
-  .ant-menu-item{
-    padding-inline:  16px !important;
+
+  .ant-menu-item,
+  .ant-menu-submenu {
+    padding: 0 !important;
+    height: 45px !important;
+
+    .ant-menu-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+
+  .ant-menu-item {
+    padding-inline: 16px !important;
   }
 }
 

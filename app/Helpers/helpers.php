@@ -32,12 +32,20 @@ if (!function_exists('menu_list')) {
             ['key' => 'my_post', 'icon' => 'bi:person', 'title' => 'Postingan Saya', 'url' => 'my_post'],
             ['key' => null, 'title' => 'Administrator', "icon" => null, "url" => null],
             ['key' => 'user', 'icon' => 'bi:person-gear', 'title' => 'Manajemen User', 'url' => 'user'],
-            ['key' => 'unit', 'icon' => 'bi:building-gear', 'title' => 'Manajemen Unit', 'url' => 'unit'],
-            ['key' => 'role', 'icon' => 'bi:people', 'title' => 'Manajemen Role', 'url' => 'role'],
-            ['key' => 'permission', 'icon' => 'bi:eye', 'title' => 'Manajemen Permission', 'url' => 'permission'],
+            ['key' => 'unit', 'icon' => 'bi:building-gear', 'title' => 'Manajemen Kategori', 'url' => 'unit'],
+            [
+                'key' => 'hak-akses',
+                'icon' => 'bi:people',
+                'title' => 'Hak Akses',
+                'url' => '#',
+                "submenu" => [
+                    ['key' => 'role', 'icon' => 'bi:people', 'title' => 'Manajemen Role', 'url' => 'role'],
+                    ['key' => 'permission', 'icon' => 'bi:eye', 'title' => 'Manajemen Permission', 'url' => 'permission'],
+                ],
+            ],
             [
                 'key' => 'report',
-                'icon' => 'bi:eye',
+                'icon' => 'lsicon:report-outline',
                 'title' => 'Laporan',
                 'url' => 'report',
                 "submenu" => [
@@ -56,7 +64,6 @@ if (!function_exists('menu_list')) {
                 ],
             ],
         ];
-
         // filter menu berdasarkan permission user
         if ($user) {
             $menu = collect($menu)->map(function ($item) use ($user) {
@@ -83,7 +90,7 @@ if (!function_exists('menu_list')) {
                 return true;
             })->values()->all();
         }
-        
+
         return $menu;
     }
 }
